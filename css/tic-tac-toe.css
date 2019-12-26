@@ -16,10 +16,10 @@
 
 @keyframes blinkParentTd {
     0%{
-      background-color: #a9dfbf;
+      background-color: #228B22;
     }
     100%{
-      background-color: #f5b7b1;
+      background-color: #B22222;
     }
 }
 
@@ -34,11 +34,11 @@ table.parentTable {
 }
 
 .enabled{
-    background-color: #a9dfbf;
+    background-color: #228B22;
 }
 
 .disabled{
-    background-color:  #f5b7b1;
+    background-color:  #B22222;
 }
 
 td.parentTd {
