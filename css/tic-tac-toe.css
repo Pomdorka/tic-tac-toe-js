@@ -10,24 +10,19 @@
       
     }
     
-    50%{
-      background-color: #55d66b;
-      
-    }
-    
     100%{
-      background-color: #222291;
+      background-color: #55d66b;
       
     }
 }
 
 @keyframes blinkParentTd {
     0%{
-      background-color: #006400;
+      background-color: #a9dfbf;
       
     }
     100%{
-      background-color: #800000;
+      background-color: #f5b7b1;
       
     }
 }
@@ -43,11 +38,11 @@ table.parentTable {
 }
 
 .enabled{
-    background-color:  #006400;
+    background-color: #a9dfbf;
 }
 
 .disabled{
-    background-color: #800000;
+    background-color:  #f5b7b1;
 }
 
 td.parentTd {
