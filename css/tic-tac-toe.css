@@ -4,6 +4,23 @@
   margin: 0;
 }
 
+@keyframes blinking {
+    0%{
+      background-color: #ff3d50;
+      
+    }
+    
+    50%{
+      background-color: #55d66b;
+      
+    }
+    
+    100%{
+      background-color: #222291;
+      
+    }
+}
+
 table {
   border-collapse: collapse;
   margin: auto;
@@ -14,7 +31,7 @@ table {
 }
 
 .disabled{
-    background-color: #FF4500;
+    background-color: #800000;
 }
 
 td.parentTd {
