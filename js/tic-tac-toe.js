@@ -1,5 +1,4 @@
-var N_SIZE = 3,
-    EMPTY = '&nbsp;',
+var EMPTY = '&nbsp;',
     turn = 'X';
 
 function init() {
@@ -7,19 +6,19 @@ function init() {
     parentTable.innerHTML = "";
     turn = 'X';
 
-    for (var pi = 0; pi < N_SIZE; pi++) {
+    for (var pi = 0; pi < 3; pi++) {
         var parentRow = document.createElement('tr');
         parentTable.appendChild(parentRow);
-        for (var pj = 0; pj < N_SIZE; pj++) {
+        for (var pj = 0; pj < 3; pj++) {
             var parentCell = document.createElement('td');
             parentCell.classList.add("parentTd", 'pi' + pi, 'pj' + pj, "enabled");
             parentRow.appendChild(parentCell);
 
             var table = document.createElement('table');
-            for (var i = 0; i < N_SIZE; i++) {
+            for (var i = 0; i < 3; i++) {
                 var row = document.createElement('tr');
                 table.appendChild(row);
-                for (var j = 0; j < N_SIZE; j++) {
+                for (var j = 0; j < 3; j++) {
                     var cell = document.createElement('td');
                     cell.classList.add("childTd", 'i' + i, 'j' + j);
                     cell.addEventListener('click', clickEvent);

@@ -7,23 +7,19 @@
 @keyframes blinkChildTd {
     0%{
       background-color: #ff3d50;
-      
     }
     
     100%{
       background-color: #55d66b;
-      
     }
 }
 
 @keyframes blinkParentTd {
     0%{
       background-color: #a9dfbf;
-      
     }
     100%{
       background-color: #f5b7b1;
-      
     }
 }
 
