@@ -5,12 +5,16 @@
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" type="text/css" href="css/tic-tac-toe.css" />
   </head>
-  <body>
+  <body onload="init()">
     <div class="container">
-      <div id="tictactoe"></div>
-      <div id="player" align="center">
-        <span id="turn" align="">Player X</span>
+      <div id="tictactoe">
+        <table id="parentTable" class="parentTable">
+        </table>
       </div>
+      <div id="player" align="center">
+        <span id="turn" align="">Ход: X</span>
+      </div>
+      <div align="center"><button onclick="init()">Начать заново</button></div>
     </div>
     <script type="text/javascript" src="js/tic-tac-toe.js"></script>
   </body>
