@@ -1,10 +1,9 @@
 var N_SIZE = 3,
-EMPTY = '&nbsp;',
-turn = 'X',
-parentTable;
+    EMPTY = '&nbsp;',
+    turn = 'X';
 
 function init() {
-    parentTable = document.getElementById('parentTable');
+    var parentTable = document.getElementById('parentTable');
     parentTable.innerHTML = "";
     turn = 'X';
 
@@ -59,7 +58,8 @@ function clickEvent() {
 }
 
 function handleClick(childTd) {
-    var parentTd = childTd.parentNode.parentNode.parentNode
+    var parentTd = childTd.parentNode.parentNode.parentNode;
+    var parentTable = parentTd.parentNode.parentNode;
 
     if (childTd.innerHTML !== EMPTY) {
         return;
