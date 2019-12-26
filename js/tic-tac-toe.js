@@ -5,6 +5,26 @@ var N_SIZE = 3,
   parentTable,
   moves = 0;
 
+function randomTurn() {
+    var parentArr = [];
+    var childArr = [];
+    Array.from(document.getElementsByClassName("parentTd enabled")).forEach(function (parentTd) {
+        parentArr.push(parentTd);
+    });
+    parentTd = parentArr[Math.floor(Math.random() * parentArr.length)];
+    console.log("randomTurn: parentArr: " + parentArr + ', parentTd: ' + parentTd.classList);
+    Array.from(parentTd.getElementsByTagName("td")).forEach(function (td) {
+        if (td.innerHTML == EMPTY)
+        childArr.push(td);
+    });
+    childTd = childArr[Math.floor(Math.random() * childArr.length)];
+    console.log("randomTurn: childArr: " + childArr + ', childTd: ' + childTd.classList);
+    return childTd;
+    //min = Math.ceil(min);
+    //max = Math.floor(max);
+    //return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function init() {
   parentTable = document.createElement('table');
   
@@ -58,35 +78,51 @@ function win(table) {
 		 (table.rows[0].cells[2].innerHTML == turn && table.rows[1].cells[1].innerHTML == turn && table.rows[2].cells[0].innerHTML == turn);
 }
 
+function draw (table){
+    //console.log('draw: table = ' + table.parentNode.classList);
+    var isDraw = true;
+    Array.from(table.getElementsByTagName("td")).forEach(function (td) {
+        console.log('  draw: td= ' + td.classList);
+        if (td.innerHTML == EMPTY || td.getElementsByTagName("table")){
+            console.log('  draw: false, td= ' + td);
+            isDraw = false;
+        }
+    });
+    //console.log('draw: true, table = ' + table.parentNode.classList);
+    return isDraw;
+}
+
 function clickEvent() {
-    //console.log(turn);
-  if (this.innerHTML !== EMPTY) {
+    handleClick(this)
+}
+
+function handleClick(childTd) {
+    var parentTd = childTd.parentNode.parentNode.parentNode
+    //console.log("handleClick: childTd=" + childTd.classList + ", parentTd=" + parentTd.classList + ', turn: ' + turn);
+  if (childTd.innerHTML !== EMPTY) {
+   // console.log("handleClick: not empty");
     return;
   }
-  if (this.parentNode.parentNode.parentNode.classList.contains("disabled")){
+  if (parentTd.classList.contains("disabled")){
+   // console.log("handleClick: disabled");
       return;
   }
   
-  
-  
-  
-  //console.log(pi + ' ' + pj);
- 
-  //console.log('after: ' + parentTd.classList);
-    this.innerHTML = turn;
-    if (win(this.parentNode.parentNode)){
-        this.parentNode.parentNode.parentNode.innerHTML = turn;
+
+
+    childTd.innerHTML = turn;
+    if (win(childTd.parentNode.parentNode)){
+        parentTd.innerHTML = turn;
+    } else if(draw(childTd.parentNode.parentNode)) {
+        parentTd.innerHTML = "-";
     }
     if (win(parentTable)){
         alert("win: " + turn);
         startNewGame();
     }
-    
-    
-    
-    
+        
     var pi, pj;
-      var memberOf = this.className.split(/\s+/);
+      var memberOf = childTd.className.split(/\s+/);
       for (var k = 0; k < memberOf.length; k++){
           if (memberOf[k].startsWith('i')){
               pi = 'pi' + memberOf[k].substr(1);
@@ -95,21 +131,30 @@ function clickEvent() {
               pj = 'pj' + memberOf[k].substr(1);
           } 
       }
-      var isTargetCompleted = document.getElementsByClassName(pi + " " + pj)[0].innerHTML.length == 1;
+    //console.log("handleClick: pi=" + pi + ', pj=' + pj);
+    var isTargetCompleted = document.getElementsByClassName(pi + " " + pj)[0].innerHTML.length == 1;
     
     Array.from(document.getElementsByClassName("parentTd")).forEach(function (parentTd) {
-     //console.log('before: ' + parentTd.classList);
+     
      if (parentTd.innerHTML.length > 1 && ((parentTd.classList.contains(pi) && parentTd.classList.contains(pj)) || isTargetCompleted)){
          parentTd.classList.add("enabled");
          parentTd.classList.remove("disabled");
      } else {
          parentTd.classList.add("disabled");
          parentTd.classList.remove("enabled");
-     } 
-     //console.log('after: ' + parentTd.classList);
+     }
     });
-    turn = turn === 'X' ? 'O' : 'X';
+    
+    if (turn === 'X'){
+        turn = 'O';
+        var td = randomTurn();
+        handleClick(td);
+        td.style = "animation: blinking 1s";
+    } else {
+        turn = 'X';
+    }
     document.getElementById('turn').textContent = 'turn ' + turn;
+    //turn = turn === 'X' ? 'O' : 'X';
 }
 
 init();
